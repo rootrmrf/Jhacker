@@ -1,0 +1,35 @@
+#coding=utf-8
+import threading 
+from socket import *
+#import time
+https://github.com/rootrmrf/Jhacker
+lock = threading.Lock()
+setdefaulttimeout(1)
+def scan(ip, port):
+    try:
+        s = socket(AF_INET, SOCK_STREAM)
+        s.connect((ip, port))
+        lock.acquire()
+        print("%s [+]%d is open" %(ip, port))
+        lock.release()
+        #s.close()
+    except:
+        pass
+
+#        print("[-]%d is close" %port)
+        
+
+def main(ip):
+    #循环输出端口号
+    #for ip in range(1,255):
+        for i in range(1,1024):
+            #scan(ip, i)
+         #   t = threading.Thread(target=scan, args=("172.20.100.%d" %ip, i))
+            t = threading.Thread(target=scan, args=(ip, i))
+            t.start()
+
+
+if __name__ == "__main__":
+    #获取目标IP
+    ip = input("Please input your target ip:")
+    main(ip)
